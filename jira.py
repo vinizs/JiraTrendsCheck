@@ -36,16 +36,23 @@ Repeat = []
 Issue = []
 
 #API requests based on the three queries (Daily_filter, Trends_Filter, Thirty_Filter) 
-response1=requests.request('GET', jira_server+Trends_filter, verify=False, auth=(username,password))
+os.system('clear')
+print ('Loading 1/3\n')
+response1=requests.request('GET', jira_server+Trends_filter, verify=True, auth=(username,password))
 Trends_Response = json.loads(response1.text)
 
-response2=requests.request('GET', jira_server+Daily_filter, verify=False, auth=(username,password))
+os.system('clear')
+print ('Loading 2/3\n')
+response2=requests.request('GET', jira_server+Daily_filter, verify=True, auth=(username,password))
 Daily_Response = json.loads(response2.text)
 
-response3=requests.request("GET", jira_server+Thirty_filter, verify=False, auth=(username,password))
+os.system('clear')
+print ('Loading 3/3\n')
+response3=requests.request("GET", jira_server+Thirty_filter, verify=True, auth=(username,password))
 Monthly_Response = json.loads(response3.text)
 
-
+os.system('clear')
+print ('Loading DONE!\n')
 
 #Go Through all the issues That are trending
 for a in Trends_Response['issues']:
