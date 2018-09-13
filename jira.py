@@ -16,15 +16,13 @@ password=getpass.getpass('Password for '+username+': ')
 jira_server='https://jira2.workday.com/rest/api/2/search?'
 
 #All jiras from https://confluence.workday.com/display/SUPOPS/New+Trending+Report (Jiras that are already created for trending items)
-Trends_filter='jql=filter%3D100089&fields=customfield_10302,key'
+Trends_filter='jql=filter%3D100089&fields=customfield_10302,key,customfield_14621'
 
 #All FGCs in the past 24-42 hours
-Daily_filter='jql=filter%3D100745&fields=customfield_10302,key&maxResults=100'
+Daily_filter='jql=filter%3D100745&fields=customfield_10302,key,customfield_14621&maxResults=100'
 
 #All FGCs for the past Month
-Thirty_filter='jql=filter%3D91177&fields=customfield_10302,key&maxResults=1000'
-
-Non_Thirty_Filter = "issues/?jql=filter%3D91177%20and%20Customer%3D&maxResults=1000"
+Thirty_filter='jql=filter%3D91177&fields=customfield_10302,customfield_14621,key&maxResults=1000'
 
 #NON API Base URL
 jira2 = "https://jira2.workday.com/" 
@@ -94,7 +92,7 @@ for i in Possible_Trend:
     for b in Monthly_Response['issues']:
 
         if i == b['fields']['customfield_10302'][0]['value']:
-              print(b['key'])
+              print(b['key'],"Root Cause:", b['fields']['customfield_14621'])
 
 
             
